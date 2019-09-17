@@ -5,6 +5,87 @@ body {
   font-family:Roboto;
 }
 
+/*--style Drop down instructions--*/
+
+/* Dropdown Button */
+.buttonInstructions {
+  background-color: #65b0cc;
+  color: white;
+  padding: 10px;
+  width:150px;
+  position: relative;
+  margin: 0 auto;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  left:20px;
+  border-radius:2%;
+}
+
+/* wrapper div of the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  width:100%;
+  margin: 0 auto;
+}
+
+/* Dropdown Content display none before hover */
+.dropdown-content {
+  display: none;
+  position: relative;
+  margin: 0 auto;
+  padding-top:20px;
+  background-color: #f9f9f9;
+  width: 80%;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+
+/* On hover display the dropdown content */
+.dropdown:hover .dropdown-content {
+  display: block;
+  z-index: 1;
+}
+
+.dropdown:hover .buttonInstructions {
+  background-color: white;
+  border: solid 2px #65b0cc;
+  color: #65b0cc;
+  -webkit-transition: height 0.3s ease-in;
+  -moz-transition: height 0.3s ease-in;
+  -o-transition: height 0.3s ease-in;
+-ms-transition: height 0.3s ease-in;
+transition: height 0.3s ease-in;
+}
+
+/*style course instructions introduction paragraph*/
+.instructions{
+  text-align: justify;
+  padding:10px;
+}
+
+p {
+  text-align: justify;
+  padding-left:20px;
+  padding-right:20px;
+  padding-bottom:20px;
+}
+
+ul {
+  text-align: justify;
+  padding-right:20px;
+}
+
+nav {
+  width: 50%;
+  margin: 0 auto;
+}
+
+/*--End style Drop down instructions--*/
+
+/*--style Game container--*/
 
 .container{
   width: 472px;
@@ -127,3 +208,4 @@ body {
   width : 50px;
   position:relative;
 }
+/*--style Game container--*/

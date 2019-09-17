@@ -8,21 +8,42 @@
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="" type="text/css" />
     <title>Simon Game</title>
-      <audio id="clip1">
-      	<source src="https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"></source>
-        </audio>
-      <audio id="clip2">
-      	<source src="https://s3.amazonaws.com/freecodecamp/simonSound2.mp3"></source>
-      </audio>
-      <audio id="clip3">
-      	<source src="https://s3.amazonaws.com/freecodecamp/simonSound3.mp3"></source>
-      </audio>
-      <audio id="clip4">
-      	<source src="https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"></source>
-      </audio>
+      <audio id="clip1" src="sounds/simonSound1.mp3"></audio>
+      <audio id="clip2" src="sounds/simonSound2.mp3"></audio>
+      <audio id="clip3" src="sounds/simonSound3.mp3"></audio>
+      <audio id="clip4" src="sounds/simonSound4.mp3"></audio>
 </head>
 <body>
-  
+    
+<!--nav bar-->
+
+<nav>    
+   <div class="dropdown">
+    <button class="buttonInstructions">Game Instructions</button>
+    <div class="dropdown-content">
+           <p class="instructions">Simon is a memory game where you need to repeat a sequence of tones and lights.
+           The device has four colored buttons, each producing a particular tone when it is pressed or activated by the device.
+           A round in the game consists of the device lighting up one or more buttons in a random order, 
+           after which the player must reproduce that order by pressing the buttons. 
+           If the user succeeds, the series becomes progressively longer and more complex.</p>
+           <p>Game instructions</p>
+             <ul>
+                 <li>To start the game flag the Power Mode toggle and press the Play button.</li>
+                 <li>By flagging the Strict toggle, you can activate the strict play mode, in this case whenever you do a mistake the game is over</li>
+                 <li>The game has 10 turn, each turn starts with the device flashing a sequence of tones and lights.</li>
+                 <li>The number of the flashes always matches the turn number shown in the blue counter display, next to the play button</li>
+                 <li>As soon as the number of flashes played by the computer matches the player sequence, the computer turn is over</li>
+                <li>The player needs to repeat the sound by pressing the coloured button</li>
+                <li>If the player sequence matches the Simon's one, the following round will flash the same sequence with an additional sound</li>
+             </ul>
+         <p class="instructions"></p>
+    </div>
+  </div> 
+</nav>   
+
+<!--nav bar--> 
+
+<!--Container Game console-->
 <div class="container">
     <div class="fourPads">
         <div>
