@@ -287,3 +287,27 @@ function winGame() {
   alert('Congratulations you won the game');
 }
 
+// function sweetalert2 - alert Game Help instructions
+
+function confirmation()
+  {
+    Swal.fire({
+  type: 'info',
+  text: "You won't be able to revert this!",
+  html:
+    '<small>Simon is a memory game where you need to repeat a sequence of tones and lights, played by the device by pressing the buttons.</small>' +
+    '<small>To win the game you have to pass 10 rounds, at each turn, the series becomes progressively longer and more complex.</small>' +
+    '<small><h3><b>How to play</b></h3></small>' +
+    '<li><small>To start the game check the Power Mode and the Play button</small></li>' +
+    '<li><small>Each turn starts with the device flashing a sequence of lights</small></li>' +
+    '<li><small>You have to repeat the same sequence by pressing the buttons</small></li>' +
+    '<li><small>If you do a mistake, you can retry after the sequence is repeated</small></li>' +
+    '<li><small>With the strict mode checked, the game is over after each mistake</small></li>' +
+    '<li><small>The number of flashes matches the turn number of the counter</small></li>' +
+    '<li><small>In each turn an additional sound is added to the previous sequence</small></li>',
+  showCloseButton: true,
+  showCancelButton: false,
+  focusConfirm: false,
+  confirmButtonAriaLabel: 'Thumbs up, great!',
+    })
+  }
