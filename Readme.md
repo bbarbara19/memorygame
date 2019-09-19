@@ -12,15 +12,15 @@ is selected once the user fails, the game is over, whereas with the standard mod
 the user can proceed to the next turn even after more wrong attempts.
 
 ### Users stories
-- People looking for a memory game
-- People who used to play the original toy version of the game and would like to try
+- Users looking for a memory game
+- Players who used to play the original toy version of the game and would like to try
 the online version too.
 
 ### UX
 * It is a one page application designed to be very intuitive
 * Navigation is functional, there is a top drop down menu button with the game instructions
-* For all the main events of the games the game instructions are displayed in an alert
-* The application is designed to be adaptable to different screen sizes
+* For all the main events of the games a brief instruction is displayed in an alert
+* The application is designed to be adaptable to different screen sizes,
 
 ### Technology used
 - HTML5
@@ -36,3 +36,11 @@ the online version too.
 ### Deployment
 Deployed using Cloud 9 AWS IDE, a local GIT directory was used for version control,
 then uploaded to GITHUB and made live using GITHUB Pages.
+
+### Deployment
+Verified with Chrome tools that the game is displayed correctly on various screen sizes (Desktop, tablets, mobile)
+Validate the html code via W3C Markup Validation Service
+
+### Credit
+The audio clips were taken from [freecodecamp]: https://freecodecamp.org
+The description of the game was taken from Wikipedia [Wikipedia]: https://en.wikipedia.org/wiki/Simon_(game)

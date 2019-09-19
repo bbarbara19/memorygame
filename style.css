@@ -116,6 +116,8 @@ nav {
 
 .pad {
   position  : relative;
+ /* width:200px;*/
+ /* height:200px;*/
   width:200px;
   height:200px;
   background-color : grey;
@@ -187,3 +189,25 @@ nav {
   position:relative;
 }
 /*--style Game container--*/
+
+/* ---- Scaling for Mobile--- */
+@media screen and (max-width: 480px) {
+  
+  .container {
+    top: 40px;
+    -moz-transform: scale(0.6);
+    -ms-transform: scale(0.6);
+    -o-transform: scale(0.6);
+    -webkit-transform: scale(0.6);
+    transform: scale(0.6);
+    
+    -o-transform-origin: 0 0;
+    -ms-transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+    transform-origin: 0 0;
+    
+    left: 50%;
+    margin-left: -142px;
+  }
+}  
