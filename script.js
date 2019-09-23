@@ -1,58 +1,52 @@
 let SimonOrder = [];
 let playerOrder = [];
-let flash;
+let lights;
 let turn;
-let good;
+let winTurn;
 let SimonTurn;
 let intervalId;
 let strict = false;
-let noise = true;
-let on = false;
+let sound = true;
+let power = false;
 let win;
 
 const turnCounter = document.querySelector("#Counter");
 
-// event listener to check if StrictMode is checked or not
+/* event listener to check if StrictMode is checked or not */
 function StrictMode(){
   if (document.querySelector('#strictMode').checked == true){
-  console.log('selezionato');
   strict = true;
   } else {
   strict = false;
   }
 }
 
-
-// event listener on the click on the strict mode checkbox, to call the function  StrictMode()
+/* event listener on the click on the strict mode checkbox, to call the function StrictMode()*/
 document.querySelector('#strictMode').addEventListener('click', function(){
- console.log('StrictMode');
  StrictMode();
 })
 
 
-// Power mode checked - allows different messages on the counter box TESTED
-
+/* Power mode checked - allows different messages on the counter box */
 function PowerChecked(){
 if (document.querySelector('#powerMode').checked == true){
-  console.log('power mode is on');
-  on = true;
+  power = true;
   document.querySelector(".boxTurn").innerHTML = "ON";
   } else {
-  console.log('power mode is off');
-  on = false;
+  power = false;
   document.querySelector(".boxTurn").innerHTML = "OFF";
   clearColor();
   clearInterval(intervalId);
   }
 }
 
+/* event listener on the click on the power mode checkbox, to call the function PowerChecked()*/
 document.querySelector('#powerMode').addEventListener('click', function(){
- console.log('PowerClicked');
  PowerChecked();
  alert('Power Mode active, press the Play button!')
 })
 
-//function clear Color - reset the pad colours to dark after the turn
+/* function clear Color - reset the pad colours to dark after the turn */
 function clearColor() {
   document.querySelector('.green').style.backgroundColor = "darkgreen";
   document.querySelector('.red').style.backgroundColor = "darkred";
@@ -60,7 +54,7 @@ function clearColor() {
   document.querySelector('.blue').style.backgroundColor = "darkblue";
 }
 
-//function Flash Color - flashes the pad colours during the turn TESTED
+/* function Flash Color - flashes the pad colours during the turn */
 function flashColor() {
  document.querySelector('.green').style.backgroundColor = "lime";
  document.querySelector('.red').style.backgroundColor = "red";
@@ -68,166 +62,162 @@ function flashColor() {
  document.querySelector('.blue').style.backgroundColor = "turquoise";
 }
 
-//functions play audio
+/* functions play audio clips */
 function padgreen() {
-  if (noise) {
+  if (sound) {
     let audio = document.getElementById("clip1");
     audio.play();
   }
-  noise = true;
+  sound = true;
   document.querySelector('.green').style.backgroundColor = "lime";
 }
 
 function padred() {
-  if (noise) {
+  if (sound) {
     let audio = document.getElementById("clip2");
     audio.play();
   }
-  noise = true;
+  sound = true;
   document.querySelector('.red').style.backgroundColor = "red";
 }
 
 function padblue() {
-  if (noise) {
+  if (sound) {
     let audio = document.getElementById("clip3");
     audio.play();
   }
-  noise = true;
+  sound = true;
   document.querySelector('.blue').style.backgroundColor = "turquoise";
 }
 
 function padyellow() {
-  if (noise) {
+  if (sound) {
     let audio = document.getElementById("clip4");
     audio.play();
   }
-  noise = true;
+  sound = true;
   document.querySelector('.yellow').style.backgroundColor = "yellow";
 }
 
-//Play function at the start Simon and Player order set to zero, counter set to 1
+/* Play function that generates the game sequence, resets the Simon and player order array,
+sets the turn counter to 1 */
+
 function play() {
   SimonOrder = [];
   playerOrder = [];
-  flash = 0;
+  lights = 0;
   win = false;
+  winTurn = true; 
   intervalId = 0;
   turn = 1;
   turnCounter.innerHTML = 1;
-  good = true; 
   for (var i = 0; i < 10; i++) {
     SimonOrder.push(Math.floor(Math.random() * 4) + 1);
   } 
   console.log(SimonOrder);
-  SimonTurn = true; //it starts with the computer turn
-  intervalId = setInterval(gameTurn, 800); //setinterval is going to run the function gameTurn after 800 mlliseconds
-  //the computer flashes a ligh after 800 milliseconds and is going to repeat it until this interval is cleared
-  //this interval is cleared after all the lights have been flashed
+  SimonTurn = true; /*it starts with the computer turn*/
+  intervalId = setInterval(switchTurn, 1200); 
 }
 
-function gameTurn() {
-  on = false; //during the computer turn the player can't click on the buttons
-  if (flash == turn) {
+
+/* function that checks the turn status */
+function switchTurn() {
+  power = false; 
+/* during the computer turn the event listener on the pad clicks is disabled */
+  if (lights == turn) {
     clearInterval(intervalId);
     SimonTurn = false;
     clearColor();
-    on = true;
+    power = true;
   }
   
-  
-  // if it is the computer turn,  it clears all the pad colours and activate the flashes on the four pads
-    if (SimonTurn) {
+/* if it is the computer turn, it clears all the pad colours and activate the lights sequence */
+  if (SimonTurn) {
     clearColor();
-    setTimeout( function Flash() {  //setTimeout after 200 milliseconds
-      if (SimonOrder[flash] == 1){ 
+    setTimeout( function Flash() {
+      if (SimonOrder[lights] == 1){ 
         padgreen();
       } 
-      if (SimonOrder[flash] == 2){ 
+      if (SimonOrder[lights] == 2){ 
         padred();
       }
-      if (SimonOrder[flash] == 3){ 
+      if (SimonOrder[lights] == 3){ 
         padblue();
       }
-      if (SimonOrder[flash] == 4){ 
+      if (SimonOrder[lights] == 4){ 
         padyellow();
       }
-      flash++; //flash started at 0 and is going to be incremented of one every time the computer flashes, this happens after 200 milliseconds
-      //a light is going to be to 
-    }, 200);
+      lights++; 
+/* the number of lights is going to be incremented of one at each turn */
+    }, 300);
   }
-  
 }
 
-//event listener of the start button to call the play()function
+/*event listener of the start button to call the play()function*/
 document.querySelector("#start").addEventListener('click', function StartCommand(){
-  if (on || win) {  
-  console.log('start pressed');
+  if (power || win) {  
   play();
   }
 })
 
-//function to check the win status
-function check() {
+/*function that checks the win status of the turn*/
+function winTest() {
   if (playerOrder[playerOrder.length - 1] !== SimonOrder[playerOrder.length - 1]) {
-    good = false;
-    console.log(good);
-    window.alert("try again!");
-  }
-
-  if (playerOrder.length == 10 && good) {
-    winGame();
-  }
-
-  if (good == false) {
+    winTurn = false;
+    console.log(winTurn);
     flashColor();
     turnCounter.innerHTML ="NO!"; 
-    /*inner html not working*/
-    setTimeout(() => {
+    if (strict){
+    clearColor();
+    setTimeout(function(){ gameOverAlert(); }, 100);
+    setTimeout(function(){ play(); }, 200);
+    //resets the game and starts play again
+    }
+    else {
+    setTimeout(function(){ 
+      window.alert("Wait for the new Simon round and try again!"); 
+    }, 70);
+    setTimeout(function(){
       turnCounter.innerHTML = turn;
       clearColor();
-
-      if (strict) {
-        play();//reset the game to zero and start play again
-      } else {
-        SimonTurn = true;
-        flash = 0;
-        playerOrder = [];
-        good = true;
-        intervalId = setInterval(gameTurn, 800);
+      SimonTurn = true;
+      lights = 0;
+      playerOrder = [];
+      winTurn = true;
+      intervalId = setInterval(switchTurn, 1200);
+       }, 1200);
+       sound = false;
       }
-    }, 800);
-    noise = false;
   }
-
-   if (turn == playerOrder.length && good && !win) {
+  
+  if (playerOrder.length == 10 && winTurn) {
+    winGame();
+  }
+  
+  if (turn == playerOrder.length && winTurn && !win) {
     turn++;
     playerOrder = [];
     SimonTurn = true;
-    flash = 0;
-    window.alert("you won the turn!");
+    lights = 0;
+    setTimeout(function(){ window.alert("you won the turn!"); }, 70);
+    setTimeout(function(){ turnCounter.innerHTML = turn; }, 70);
     turnCounter.innerHTML = turn;
-    intervalId = setInterval(gameTurn, 800);
-    console.log('the turn number is:'+turn);
+    intervalId = setInterval(switchTurn, 1200);
   }
+}
 
-} 
-
-
-/*function that listens to the player click on the pads, records the number clicked in the Player Order array 
-flashes the pad and sound and after a timeout clear the pad colours*/
+/*function that listens to the player click on the pads, records the number clicked in the Player Order array, 
+flashes the pad and sounds and after a timeout clear the pad colours*/
 
 document.querySelectorAll('.pad').forEach(function(e){
     e.addEventListener('click', function(){
-      if (on){
-        console.log('cliccato'); 
+      if (power){
         var padClicked = this.id;
               switch (padClicked) {
               case "green":
-                console.log('green clicked');
                 playerOrder.push(1);
-                console.log(playerOrder);
                 padgreen(); 
-                check();
+                winTest();
                 if (!win) {
                   setTimeout(function(){ 
                   clearColor(); 
@@ -235,11 +225,9 @@ document.querySelectorAll('.pad').forEach(function(e){
                 }
                 break;
               case "yellow":
-                console.log('yellow clicked');
                 playerOrder.push(4); 
-                console.log(playerOrder);
                 padyellow();
-                check();
+                winTest();
                 if (!win) {
                   setTimeout(function(){ 
                   clearColor(); 
@@ -247,11 +235,9 @@ document.querySelectorAll('.pad').forEach(function(e){
                 }
                 break;
               case "red":
-                console.log('red clicked');
                 playerOrder.push(2); 
-                console.log(playerOrder);
                 padred();
-                check();
+                winTest();
                 if (!win) {
                   setTimeout(function(){ 
                   clearColor(); 
@@ -259,11 +245,9 @@ document.querySelectorAll('.pad').forEach(function(e){
                 }
                 break;
               case "blue":
-                console.log('blue clicked');
                 playerOrder.push(3);
-                console.log(playerOrder);
                 padblue();
-                check();
+                winTest();
                 if (!win) { 
                   setTimeout(function(){ 
                   clearColor(); 
@@ -278,24 +262,23 @@ document.querySelectorAll('.pad').forEach(function(e){
       })
 
 
-// function win the game
+/*function win the game*/
 function winGame() {
   flashColor();
   turnCounter.innerHTML = "WIN!";
-  on = false;
+  power = false;
   win = true;
-  alert('Congratulations you won the game');
+  gameWinAlert();
 }
 
-// function sweetalert2 - alert Game Help instructions
-
-function confirmation()
+/*function sweetalert2 - alert Game Help instructions*/
+function gamehelp()
   {
     Swal.fire({
   type: 'info',
   text: "You won't be able to revert this!",
   html:
-    '<small>Simon is a memory game where you need to repeat a sequence of tones and lights, played by the device by pressing the buttons.</small>' +
+    '<small>Simon is a memory game in which you need to repeat a sequence of tones and lights, played by the device by pressing the buttons.</small>' +
     '<small>To win the game you have to pass 10 rounds, at each turn, the series becomes progressively longer and more complex.</small>' +
     '<small><h3><b>How to play</b></h3></small>' +
     '<li><small>To start the game check the Power Mode and the Play button</small></li>' +
@@ -306,6 +289,38 @@ function confirmation()
     '<li><small>The number of flashes matches the turn number of the counter</small></li>' +
     '<li><small>In each turn an additional sound is added to the previous sequence</small></li>',
   showCloseButton: true,
+  showCancelButton: false,
+  focusConfirm: false,
+  confirmButtonAriaLabel: 'Thumbs up, great!',
+    })
+  }
+  
+/*function sweetalert2 - alert Win Game */
+function gameWinAlert()
+  {  
+   Swal.fire({
+  html:
+    '<i class="fas fa-medal"></i> ' +
+    '</br> ' +
+    '<b>Congratulations!</b> ' +
+    'You are the winner!</b>',
+  showCloseButton: false,
+  showCancelButton: false,
+  focusConfirm: false,
+  confirmButtonAriaLabel: 'Thumbs up, great!',
+    })
+  }
+  
+/*function sweetalert2 - alert game over*/
+function gameOverAlert()
+  {  
+   Swal.fire({
+  html:
+    '<i class="fas fa-gamepad"></i> ' +
+    '</br> ' +
+    '<b>Game Over</b> ' +
+    'Play again!</b>',
+  showCloseButton: false,
   showCancelButton: false,
   focusConfirm: false,
   confirmButtonAriaLabel: 'Thumbs up, great!',

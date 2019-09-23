@@ -8,6 +8,8 @@ body {
  padding:0;
 }
 
+
+
 /*--style Button Drop down instructions--*/
 
 /* Dropdown Button */
@@ -30,7 +32,6 @@ body {
   background-color: LightBlue;
   color:#3085d6;
   border: solid 1px  #3085d6;
-  #3085d6
 }
 
 .btn-wrap {
@@ -54,15 +55,18 @@ nav {
  width: 50%;
  margin: 0 auto;
 }
+
 /*--End style Button Drop down instructions--*/
 
-/*--style Game container--*/
 
-.h1{
-  font-family: 'Press Start 2P', cursive;
-  font-size:16px;
-  color : #222;
+/*--Start style Game container--*/
+
+h1{
+  font-family: 'Press Start 2P', cursive !important;
+  font-size:18px;
+  color : white !important;
   margin-top:10px;
+  text-align:center;
 }
 
 .container{
@@ -72,7 +76,7 @@ nav {
   position: relative;
   text-align: center;
   margin:auto;
-  background-color:darkslategray;
+  background-color:#476e8f;
   top:10vh;
   box-shadow: 0px 0px 12px #222;
 }
@@ -111,17 +115,15 @@ nav {
   left:50%;
   margin: -122px 0 0  -122px;
   background-color:#ECE7EE;
-  border: 12px solid #333;
+  border: 12px solid #476e8f;
 }
 
 .pad {
   position  : relative;
- /* width:200px;*/
- /* height:200px;*/
   width:200px;
   height:200px;
   background-color : grey;
-  border: 12px solid #333;
+  border: 12px solid #476e8f;
 }
 
 .inline{
@@ -141,7 +143,7 @@ nav {
   margin:auto;
 }
 
-.round-btn{
+.play-btn{
   width : 25px;
   height : 25px;
   position: relative;
@@ -152,7 +154,7 @@ nav {
   top : -5px;
 }
 
-.round-btn:active{
+.play-btn:active{
     box-shadow : 0 1px 1px #292929;
     top : -4px;
 }
@@ -190,24 +192,41 @@ nav {
 }
 /*--style Game container--*/
 
-/* ---- Scaling for Mobile--- */
+/* media query scaling for mobile */
 @media screen and (max-width: 480px) {
   
   .container {
-    top: 40px;
-    -moz-transform: scale(0.6);
-    -ms-transform: scale(0.6);
-    -o-transform: scale(0.6);
-    -webkit-transform: scale(0.6);
-    transform: scale(0.6);
+    top: 20px;
+    -moz-transform: scale(0.7);
+    -ms-transform: scale(0.7);
+    -o-transform: scale(0.7);
+    -webkit-transform: scale(0.7);
+    transform: scale(0.7); /* scaleX(0.6) scaleY(0.6) */
     
     -o-transform-origin: 0 0;
     -ms-transform-origin: 0 0;
     -webkit-transform-origin: 0 0;
     -moz-transform-origin: 0 0;
     transform-origin: 0 0;
-    
+   
     left: 50%;
-    margin-left: -142px;
+    margin-left: -160px;
+  }
+  h1 {
+    font-size:14px;
   }
 }  
+
+
+/* styling the icons of the win and game over alerts */
+.fa-medal {
+  font-size: 100px;
+  color: #65b0cc;
+  padding-bottom: 10px;
+}
+
+.fa-gamepad {
+  font-size: 100px;
+  color: #65b0cc;
+  padding-bottom: 10px;
+}
